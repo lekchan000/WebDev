@@ -3,55 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Form</title>
+    <title>
+        Register Form
+    </title>
+    <style>
+
+    .container {
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: aquamarine;
+        padding: 10px;
+    }
+    .header {
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .header-form {
+        margin-bottom: 10px;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .form-input{
+        margin-bottom: 5px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .button {
+        border: 0;
+        width: 100%;
+        height: 40px;
+        background-color: rgb(0, 255, 234);
+        color: black;
+    }
+
+    input.form , textarea {
+        border: 1px black solid;
+        width: 100%;
+    }
+    </style>
 </head>
+
 <body>
-    <h1>Register Form</h1>
-    <div>
-        Fisrtname   <input type="text"      placeholder="Enter your name"       id="name">
-    </div>
-    <div>
-        Lastname    <input type="text"      placeholder="Enter your lastname"   id="lastname">
-    </div>
-    <div>
-        Age         <input type="number"    placeholder="Enter your age"        id="age" min="18" max="100">
-    </div>
-    <div>
-        Gender
-    </div>
-    <div>
-        <input name="gender" type="radio"> male
-    </div>
-    <div>
-        <input name="gender" type="radio"> female
-    </div>
-    <div>
-        <input name="gender" type="radio"> none
-    </div>
-    <div>Interest</div>
-    <div>
-        <input name="Interest" type="checkbox"> Book
-    </div>
-    <div>
-        <input name="Interest" type="checkbox"> Game
-    </div>
-    <div>
-        <input name="Interest" type="checkbox"> Movie
-    </div>
-    <div>
-        <input name="Interest" type="checkbox"> Sport
-    </div>
-    <div>
-        <input name="Interest" type="checkbox"> Female
-    </div>
-    <div>
-        Description 
-        <div>
-            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+    <div class="container">
+        <div class="header form-input">
+            Register Form
         </div>
-    </div>
-    <div>
-        <button id="submit">Submit</button>
+
+        <div class="flex form-input">
+            <div class="header-form">
+                Fisrtname <input class="form" type="text" placeholder="Enter your name" id="name">
+            </div>
+        </div>
+
+        <div class="flex form-input">
+            <div class="header-form">
+                Lastname <input class="form" type="text" placeholder="Enter your lastname" id="lastname">
+            </div>
+        </div>
+
+        <div class="flex form-input">
+            <div class="header-form">
+                Age <input class="form" type="number" placeholder="Enter your age" id="age" min="1" max="100">
+            </div>
+        </div>
+
+        <div class = "header-form form-input">
+            Gender
+            <input name="gender" type="radio"> male
+            <input name="gender" type="radio"> female
+            <input name="gender" type="radio"> none
+        </div>
+
+        <div class = "header-form form-input">
+            Interest
+        </div>
+
+        <div>
+            <input name="Interest" type="checkbox"> Book
+        </div>
+        <div>
+            <input name="Interest" type="checkbox"> Game
+        </div>
+        <div>
+            <input name="Interest" type="checkbox"> Movie
+        </div>
+        <div>
+            <input name="Interest" type="checkbox"> Sport
+        </div>
+        <div>
+            <input name="Interest" type="checkbox"> Female
+        </div>
+
+        <div class = "header-form form-input">
+            Description 
+            <div>
+                <textarea name="description" id="description" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="center">
+            <button class="button" id="submit">Submit</button>
+        </div>
     </div>
 </body>
 </html>
