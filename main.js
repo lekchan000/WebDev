@@ -59,4 +59,37 @@ for (let index=0 ; index < score.length ; index++) {
 }
 */
 //----------------------------------------------------------------------------------------
+let students = [{
+    name : "Rio" ,
+    age : 16 ,
+    grade : "A"
+}, {
+    name : "Yuka" ,
+    age : 15 ,
+    grade : "B"
+}, {
+    name : "Noa" ,
+    age : 15 ,
+    grade : "B"
+}]
+
+let student = students.find((s)=>{
+    if (s.name == "Yuka"){
+        return true
+    }
+})
+console.log("student: ",student)
+
+let highAge = students.filter((s) => {
+    if (s.age >=16){
+        return true
+    }
+})
+console.log("highAge: ",highAge)
+
+let doubleAge = students.map((s) =>{
+    s.age = s.age *2
+    return s
+})
+console.log("doubleAge: ",doubleAge)
 
