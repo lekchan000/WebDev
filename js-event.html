@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!----------------------------------------------------------------------------------------------->
+    <button onclick="userClicked()">
+        Click Here
+    </button>
+    <!----------------------------------------------------------------------------------------------->
+    <input type="radio" name="gender" value="male" onchange="changegender()"> male
+    <input type="radio" name="gender" value="female" onchange="changegender()"> female
+    <!----------------------------------------------------------------------------------------------->
+    Nickname <input type="text" name="nickname" onkeyup="changenickname()">
+
+    <script>
+    //----------------------------------------------------------------------------------------------->
+        function userClicked() {
+            console.log("Button Clicked")
+        }
+    //-----------------------------------------------------------------------------------------------
+        function changegender() {
+            console.log("Change Gender")
+            let genderIn = document.querySelectorAll("input[name=gender]")
+            let gender = ""
+            for (let i=0 ; i<genderIn.length;i++){
+                if(genderIn[i].checked){
+                    gender = genderIn[i].value
+                }
+            }
+            console.log("Selected gender :",gender)
+        }
+    //-----------------------------------------------------------------------------------------------
+        function changenickname() {
+            let nickDOM = document.querySelector("input[name=nickname]")
+            console.log("Change Nickname : ",nickDOM.value)
+        }
+    </script>
+</body>
+</html>
