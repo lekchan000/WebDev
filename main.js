@@ -51,3 +51,12 @@ console.log("Your grade is ",grade1)
 console.log("Your grade is ",grade2) 
 */
 //----------------------------------------------------------------------------------------
+/*
+let score = [10,20,30,40]
+
+for (let index=0 ; index < score.length ; index++) {
+    console.log(score[index])
+}
+*/
+//----------------------------------------------------------------------------------------
+
