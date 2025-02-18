@@ -24,4 +24,30 @@ let students = [{
 console.log("My name is ",firstname)
 console.log(students) 
 */
+//---------------------------------------------------------------------------------------
+/*
+let score1 = 50
+let score2 = 60
+let grade = ""
 
+function calGrade(score) {
+    if (score>=80){
+        grade = "A"
+    } else if (score>=70) {
+        grade = "B"
+    } else if (score>=60) {
+        grade = "C"
+    } else if (score>=50) {
+        grade = "D"
+    } else {
+        grade = "F"
+    }
+    return grade
+}
+
+let grade1 = calGrade(score1)
+let grade2 = calGrade(score2)
+console.log("Your grade is ",grade1)
+console.log("Your grade is ",grade2) 
+*/
+//----------------------------------------------------------------------------------------
