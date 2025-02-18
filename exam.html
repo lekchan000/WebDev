@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-        console.log("Hello World")
-    </script>
 </head>
 <body>
-    <div>
-        Hello World
-    </div>
+        Fisrtname   <input id="fisrtname" class="input" type="text" name="fisrtname" value="Yao">
+        Lastname    <input id="lastname" class="input" type="text" name="lastname" value="Admiral"><br>
+        interest    <input type="checkbox" name="interest" value="Books"> Books
+                    <input type="checkbox" name="interest" value="Books"> Games
+                    <input type="checkbox" name="interest" value="Books"> Sports
+
+    <script>
+        let checkboxDOM = document.querySelectorAll("input[name=interest]")
+        for (let i=0; i<checkboxDOM.length; i++) {
+            console.log("checkboxDOM : ",checkboxDOM[i].value)
+        }
+
+    </script>
 </body>
 </html>
