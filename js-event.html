@@ -15,7 +15,21 @@
     <input type="radio" name="gender" value="female" onchange="changegender()"> female
     <!----------------------------------------------------------------------------------------------->
     Nickname <input type="text" name="nickname" onkeyup="changenickname()">
-
+    <!----------------------------------------------------------------------------------------------->
+    <div onmouseover="overItem()" onmouseup="upItem()" onmousedown="downItem()">
+        Click Here
+    </div>
+    <!----------------------------------------------------------------------------------------------->
+    <button onclick="clickItem()">
+        1st button
+    </button>
+    <button id="button2nd">
+        2nd button
+    </button>
+    <!----------------------------------------------------------------------------------------------->
+    <!----------------------------------------------------------------------------------------------->
+    
+    
     <script>
     //----------------------------------------------------------------------------------------------->
         function userClicked() {
@@ -38,6 +52,25 @@
             let nickDOM = document.querySelector("input[name=nickname]")
             console.log("Change Nickname : ",nickDOM.value)
         }
+    //-----------------------------------------------------------------------------------------------
+        function overItem(){
+            console.log("mouse over")
+        }
+        function upItem(){
+            console.log("mouse up")
+        }
+        function downItem(){
+            console.log("mouse down")
+        }
+    //-----------------------------------------------------------------------------------------------
+        function clickItem(){
+            console.log("1st clicked")
+        }
+
+        let button2ndDom = document.getElementById("button2nd")
+        button2ndDom.addEventListener("click",function(){
+            console.log("2nd clicked")
+        })
     </script>
 </body>
 </html>
