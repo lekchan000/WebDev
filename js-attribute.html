@@ -6,7 +6,11 @@
     <title>JS-Attribute</title>
 </head>
 <body>
-    <a href="https://www.youtube.com/">Youtube</a>
-    
+    <a id="thisLink" href="https://www.youtube.com/" target="_blank">Youtube</a>
+    <script>
+        thisLinkDOM = document.getElementById("thisLink")
+        console.log(thisLinkDOM.getAttribute("href"))
+        console.log(thisLinkDOM.getAttribute("target"))
+    </script>
 </body>
 </html>
