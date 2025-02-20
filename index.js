@@ -1,3 +1,3 @@
-function submitData(){
+function submitData() {
     console.log("Submit Data")
 }
