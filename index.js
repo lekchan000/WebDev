@@ -6,7 +6,7 @@ function submitData() {
     let interest_DOM = document.querySelectorAll('input[name=Interest]:checked')
         let interest = ''
         for (let i = 0 ; i < interest_DOM.length; i++) {
-            interest += interest_DOM.value + ', '
+            interest += interest_DOM[i].value + ', '
         }
     let description_DOM = document.querySelector('textarea[name=description]')
 
