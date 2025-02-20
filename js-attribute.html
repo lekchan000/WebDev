@@ -6,11 +6,26 @@
     <title>JS-Attribute</title>
 </head>
 <body>
-    <a id="thisLink" href="https://www.youtube.com/" target="_blank">Youtube</a>
+    <a id="thisLink" href="https://www.youtube.com/" target="_blank">Youtube</a><br>
+    Firstname <input type="text" name="firstname" value="Yao"><br>
+    <button id="thisbotton" onclick="sendData()">
+        Send Data
+    </button>
     <script>
-        thisLinkDOM = document.getElementById("thisLink")
+        let thisLinkDOM = document.getElementById("thisLink")
+        let thisinput = document.querySelector("input[name=firstname]")
         console.log(thisLinkDOM.getAttribute("href"))
         console.log(thisLinkDOM.getAttribute("target"))
+        console.log(thisinput.getAttribute("value"))
+
+        thisLinkDOM.setAttribute("href","https://www.google.com/")
+        console.log(thisLinkDOM.getAttribute("href"))
+
+        function sendData() {
+            let thisbottonDOM = document.getElementById("thisbotton")
+            thisbottonDOM.style.backgroundColor = "red"
+            console.log(thisbottonDOM.style.backgroundColor)
+        }
     </script>
 </body>
 </html>
