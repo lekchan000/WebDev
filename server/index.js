@@ -49,10 +49,18 @@ app.put('/user/:id',(req,res)=>{
   // search user
   let selectedindex = users.findIndex(user => user.id == id)
   // update user
-  users[selectedindex].firstname  = updateuser.firstname    || users[selectedindex].firstname
-  users[selectedindex].lastname   = updateuser.lastname     || users[selectedindex].lastname
-  users[selectedindex].age        = updateuser.age          || users[selectedindex].age
-  users[selectedindex].gender     = updateuser.gender       || users[selectedindex].gender
+  users[selectedindex].firstname = updateuser.firstname || users[selectedindex].firstname
+  users[selectedindex].lastname = updateuser.lastname || users[selectedindex].lastname
+  users[selectedindex].age = updateuser.age || users[selectedindex].age
+  users[selectedindex].gender = updateuser.gender || users[selectedindex].gender
+  
+    res.json({
+      message: 'Updated',
+      data:{
+        user: updateuser,
+        indexUpdate: selectedindex
+    }
+  })
 })
 //------------------------------------------------------------------
 //------------------------------------------------------------------
