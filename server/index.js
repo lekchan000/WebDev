@@ -1,14 +1,7 @@
-const http = require('http')
-
-const host = 'localhost'
+const express = require('express')
+const app = express()
 const port = 8000
 
-const requestListener = function (req, res) {
-    res.writeHead(200)
-    res.end("My first server!")
-  }
-
-const server = http.createServer(requestListener)
-server.listen(port, host, () => {
-console.log(`Server is running on http://${host}:${port}`)
-  })
+app.listen(port, (req,res) => {
+  console.log('HTTP server run at ' + port)
+})
