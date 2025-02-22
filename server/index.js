@@ -43,24 +43,29 @@ app.get('/users/:id',(req,res)=>{
 //------------------------------------------------------------------
 //------------------------------------------------------------------
 //------------------------------------------------------------------
-app.put('/user/:id',(req,res)=>{
-  let id = req.params.id
-  let updateuser = req.body
-  // search user
-  let selectedindex = users.findIndex(user => user.id == id)
-  // update user
-  users[selectedindex].firstname = updateuser.firstname || users[selectedindex].firstname
-  users[selectedindex].lastname = updateuser.lastname || users[selectedindex].lastname
-  users[selectedindex].age = updateuser.age || users[selectedindex].age
-  users[selectedindex].gender = updateuser.gender || users[selectedindex].gender
-  
-    res.json({
-      message: 'Updated',
-      data:{
-        user: updateuser,
-        indexUpdate: selectedindex
+app.put('/users/:id', (req, res, next) => {
+  try {
+    let id = parseInt(req.params.id)
+    let updateUser = req.body
+    let selectedIndex = users.findIndex(user => user.id === id)
+    if (selectedIndex !== -1) {
+      users[selectedIndex] = {
+        ...users[selectedIndex],
+        ...updateUser
+      }
+      res.json({
+        message: 'Updated',
+        data: {
+          user: users[selectedIndex],
+          indexUpdate: selectedIndex
+        }
+      })
+    } else {
+      res.status(404).json({ message: 'User not found' })
     }
-  })
+  } catch (err) {
+    next(err)
+  }
 })
 //------------------------------------------------------------------
 //------------------------------------------------------------------
