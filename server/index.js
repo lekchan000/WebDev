@@ -9,11 +9,20 @@ let counter = 1
 
 app.use(bodyparser.json())
 
+//------------------------------------------------------------------
 app.get('/users',(req,res)=>{
-  res.json(users)
+  const filterUser = users.map(user =>{
+    return {
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname ,
+      fullname: user.firstname +' '+ user.lastname
+    }
+  })
+  res.json(filterUser)
 })
-
-app.post('/user',(req,res)=>{
+//------------------------------------------------------------------
+app.post('/users',(req,res)=>{
   let user = req.body
   user.id = counter
   counter += 1
@@ -24,24 +33,50 @@ app.post('/user',(req,res)=>{
     user: user
   })
 })
-
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+app.get('/users/:id',(req,res)=>{
+  let id = req.params.id
+  let selectedindex = users.findIndex(user => user.id == id)
+  res.json(users[selectedindex])
+})
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+//------------------------------------------------------------------
 app.put('/user/:id',(req,res)=>{
   let id = req.params.id
   let updateuser = req.body
   // search user
   let selectedindex = users.findIndex(user => user.id == id)
-  res.send(selectedindex + '')
   // update user
-  users[selectedindex] = updateuser
+  users[selectedindex].firstname  = updateuser.firstname    || users[selectedindex].firstname
+  users[selectedindex].lastname   = updateuser.lastname     || users[selectedindex].lastname
+  users[selectedindex].age        = updateuser.age          || users[selectedindex].age
+  users[selectedindex].gender     = updateuser.gender       || users[selectedindex].gender
+})
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+app.delete('/users/:id',(req,res) =>{
+  let id = req.params.id
+    // search user index
+  let selectedindex = users.findIndex(user => user.id == id)
+    // delete it
+
+  users.splice(selectedindex,1)
+
   res.json({
-    message:'Update Complete',
-    data: {
-      user: updateuser,
-      indexupdate: selectedindex
-    }
+    message: 'Deleted',
+    indexDelete: selectedindex
   })
 })
 
 app.listen(port, (req,res) => {
   console.log('HTTP server run at ' + port)
 })
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+//------------------------------------------------------------------
+//------------------------------------------------------------------
