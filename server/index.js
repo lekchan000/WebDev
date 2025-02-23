@@ -58,29 +58,22 @@ app.get('/users/:id', async (req,res)=>{
   }
 })
 //------------------------------------------------------------------
-app.put('/users/:id', (req, res, next) => {
-  try {
-    let id = parseInt(req.params.id)
-    let updateUser = req.body
-    let selectedIndex = users.findIndex(user => user.id === id)
-    if (selectedIndex !== -1) {
-      users[selectedIndex] = {
-        ...users[selectedIndex],
-        ...updateUser
-      }
+app.put('/users/:id', async (req, res, next) => {
+    try {
+      let id = parseInt(req.params.id)
+      let updateUser = req.body
+      const results = await conn.query('UPDATE users SET ? WHERE id = ? ',[updateUser,id])
+
       res.json({
-        message: 'Updated',
-        data: {
-          user: users[selectedIndex],
-          indexUpdate: selectedIndex
-        }
+        message:'UPDATE COMPLETED',
+        data: results[0]
       })
-    } else {
-      res.status(404).json({ message: 'User not found' })
+    } catch (error) {
+      console.log('errorMessage',error.message)
+      res.status(500).json({
+        message:'Something Wrong',
+      })
     }
-  } catch (err) {
-    next(err)
-  }
 })
 //------------------------------------------------------------------
 app.delete('/users/:id',(req,res) =>{
