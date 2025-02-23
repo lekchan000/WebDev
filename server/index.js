@@ -6,9 +6,6 @@ const app = express()
 const port = 8000
 let conn = null
 
-let users = []
-let counter = 1
-
 app.use(bodyparser.json())
 
 const initMysql = async () => {
@@ -26,15 +23,15 @@ app.get('/users', async (req,res)=>{
     res.json(results[0])
   })
 //------------------------------------------------------------------
-app.post('/users',(req,res)=>{
+app.post('/users', async (req,res)=>{
   let user = req.body
-  user.id = counter
-  counter += 1
+  const results = await conn.query('INSERT INTO users SET ?',user)
 
-  users.push(user)
+  console.log('Results' , results)
+
   res.json({
-    message: 'add ok',
-    user: user
+    message:'INSERT COMPLETED',
+    data: results[0]
   })
 })
 //------------------------------------------------------------------
