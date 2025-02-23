@@ -11,11 +11,6 @@ let counter = 1
 
 app.use(bodyparser.json())
 
-app.listen(port, async (req,res) => {
-  await initMysql()
-  console.log('HTTP server run at ' + port)
-})
-
 const initMysql = async () => {
   conn = await mysql.createConnection({
     host: 'localhost',
@@ -25,30 +20,11 @@ const initMysql = async () => {
     port:'3306'
   })
 }
-
-
 //------------------------------------------------------------------
-app.get('/testdb', async (req,res) => {
-  try {
+app.get('/users', async (req,res)=>{
     const results = await conn.query('SELECT * FROM users') 
     res.json(results[0])
-  } catch (error) {
-    console.error('Error fetching users:',error.message)
-    res.status(500).json({error:'Error fetching users'})
-  }
-})
-//------------------------------------------------------------------
-app.get('/users',(req,res)=>{
-  const filterUser = users.map(user =>{
-    return {
-      id: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname ,
-      fullname: user.firstname +' '+ user.lastname
-    }
   })
-  res.json(filterUser)
-})
 //------------------------------------------------------------------
 app.post('/users',(req,res)=>{
   let user = req.body
@@ -105,5 +81,9 @@ app.delete('/users/:id',(req,res) =>{
     message: 'Deleted',
     indexDelete: selectedindex
   })
+})
 //------------------------------------------------------------------
+app.listen(port, async (req,res) => {
+  await initMysql()
+  console.log('HTTP server run at ' + port)
 })
