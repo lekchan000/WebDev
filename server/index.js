@@ -41,17 +41,19 @@ app.post('/users', async (req,res)=>{
 //------------------------------------------------------------------
 app.get('/users/:id', async (req,res)=>{
   try {
-  let id = req.params.id
-  const results = await conn.query('SELECT * FROM users WHERE id = ?',id)
-  if (results[0].length > 0){
-    res.json(results[0][0])
-  } else {
-    throw new Error('Not Found')
+    let id = req.params.id
+    const results = await conn.query('SELECT * FROM users WHERE id = ?',id)
+
+    if (results[0].length == 0){
+      throw { statusCode: 404,message:'Not Found'}
     }
+    res.json(results[0][0])
   } catch (error) {
-    console.log('errorMessage',error.message)
-    res.status(500).json({
-      message:'Something Wrong',
+    console.log('errorMessage : ',error.message)
+    let statusCode = error.statusCode || 500
+    res.status(statusCode).json({
+    message:'Something Wrong',
+    errorMessage: error.message
     })
   }
 })
