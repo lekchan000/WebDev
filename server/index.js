@@ -46,10 +46,8 @@ app.get('/users/:id', async (req,res)=>{
   if (results[0].length > 0){
     res.json(results[0][0])
   } else {
-    res.status(404).json({
-      message:'Not Found'
-    })
-  }
+    throw new Error('Not Found')
+    }
   } catch (error) {
     console.log('errorMessage',error.message)
     res.status(500).json({
