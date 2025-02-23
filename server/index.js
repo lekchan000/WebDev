@@ -4,10 +4,17 @@ const mysql = require('mysql2/promise')
 
 const app = express()
 const port = 8000
-const conn = null
+let conn = null
 
 let users = []
 let counter = 1
+
+app.use(bodyparser.json())
+
+app.listen(port, async (req,res) => {
+  await initMysql()
+  console.log('HTTP server run at ' + port)
+})
 
 const initMysql = async () => {
   conn = await mysql.createConnection({
@@ -19,8 +26,17 @@ const initMysql = async () => {
   })
 }
 
-app.use(bodyparser.json())
 
+//------------------------------------------------------------------
+app.get('/testdb', async (req,res) => {
+  try {
+    const results = await conn.query('SELECT * FROM users') 
+    res.json(results[0])
+  } catch (error) {
+    console.error('Error fetching users:',error.message)
+    res.status(500).json({error:'Error fetching users'})
+  }
+})
 //------------------------------------------------------------------
 app.get('/users',(req,res)=>{
   const filterUser = users.map(user =>{
@@ -90,18 +106,4 @@ app.delete('/users/:id',(req,res) =>{
     indexDelete: selectedindex
   })
 //------------------------------------------------------------------
-})
-app.get('/testdb', async (req,res) => {
-  try {
-    const results = await conn.query('SELECT * FROM users') 
-    res.json(results[0])
-  } catch (error) {
-    console.error('Error fetching users:',error.message)
-    res.status(500).json({error:'Error fetching users'})
-  }
-})
-//------------------------------------------------------------------
-app.listen(port, async (req,res) => {
-  await initMysql()
-  console.log('HTTP server run at ' + port)
 })
