@@ -76,18 +76,21 @@ app.put('/users/:id', async (req, res, next) => {
     }
 })
 //------------------------------------------------------------------
-app.delete('/users/:id',(req,res) =>{
-  let id = req.params.id
-    // search user index
-  let selectedindex = users.findIndex(user => user.id == id)
-    // delete it
+app.delete('/users/:id', async (req,res) =>{
+  try {
+    let id = parseInt(req.params.id)
+    const results = await conn.query('DELETE from users WHERE id = ? ',id)
 
-  users.splice(selectedindex,1)
-
-  res.json({
-    message: 'Deleted',
-    indexDelete: selectedindex
-  })
+    res.json({
+      message:'DELETE COMPLETED',
+      data: results[0]
+    })
+  } catch (error) {
+    console.log('errorMessage',error.message)
+    res.status(500).json({
+      message:'Something Wrong',
+    })
+  }
 })
 //------------------------------------------------------------------
 app.listen(port, async (req,res) => {
