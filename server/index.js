@@ -24,21 +24,38 @@ app.get('/users', async (req,res)=>{
   })
 //------------------------------------------------------------------
 app.post('/users', async (req,res)=>{
-  let user = req.body
-  const results = await conn.query('INSERT INTO users SET ?',user)
-
-  console.log('Results' , results)
-
-  res.json({
-    message:'INSERT COMPLETED',
-    data: results[0]
-  })
+  try {
+    let user = req.body
+    const results = await conn.query('INSERT INTO users SET ?',user)
+    res.json({
+      message:'INSERT COMPLETED',
+      data: results[0]
+    })
+  } catch (error) {
+    console.log('errorMessage',error.message)
+    res.status(500).json({
+      message:'Something Wrong',
+    })
+  }
 })
 //------------------------------------------------------------------
-app.get('/users/:id',(req,res)=>{
+app.get('/users/:id', async (req,res)=>{
+  try {
   let id = req.params.id
-  let selectedindex = users.findIndex(user => user.id == id)
-  res.json(users[selectedindex])
+  const results = await conn.query('SELECT * FROM users WHERE id = ?',id)
+  if (results[0].length > 0){
+    res.json(results[0][0])
+  } else {
+    res.status(404).json({
+      message:'Not Found'
+    })
+  }
+  } catch (error) {
+    console.log('errorMessage',error.message)
+    res.status(500).json({
+      message:'Something Wrong',
+    })
+  }
 })
 //------------------------------------------------------------------
 app.put('/users/:id', (req, res, next) => {
