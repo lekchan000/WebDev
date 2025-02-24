@@ -1,4 +1,4 @@
-function submitData() {
+const submitData = async () => {
     let firstname_DOM = document.querySelector('input[name = firstname]')
     let lastname_DOM = document.querySelector('input[name = lastname]')
     let age_DOM = document.querySelector('input[name = age]')
@@ -23,4 +23,12 @@ function submitData() {
         description: description_DOM.value
     }
     console.log('Submit Data',userData)
+    try {
+        const response = await axios.post('http://localhost:8000/users',userData)
+        console.log('response',response.data)
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.data.message)
+        }
+    }
 }

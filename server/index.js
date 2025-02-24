@@ -1,12 +1,14 @@
 const express = require('express')
 const bodyparser = require('body-parser')
 const mysql = require('mysql2/promise')
+const cors = require('cors')
 
 const app = express()
 const port = 8000
 let conn = null
 
 app.use(bodyparser.json())
+app.use(cors())
 
 const initMysql = async () => {
   conn = await mysql.createConnection({
